@@ -124,14 +124,14 @@ export default {
           this.$store.dispatch('deleteUser')
       }
   },
-  async created() {
-      await this.$store.dispatch('getUserById', 4)
-      const user = this.$store.getters.getterAllUserInfos;
-      console.log("USER", user)
+//   async created() {
+//       await this.$store.dispatch('getUserById', 4)
+//       const user = this.$store.getters.getterAllUserInfos;
+//       console.log("USER", user)
 
-      this.username = user.username;
-      this.email = user.email;
-  }
+//       this.username = user.username;
+//       this.email = user.email;
+//   }
 }
 </script>
 
