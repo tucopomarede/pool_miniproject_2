@@ -29,6 +29,9 @@ export default new Vuex.Store({
     SET_CLOCK(state, payload) {
       console.log('CLOCK mutation payload : ', payload)
       state.clock = payload.data.data
+    },
+    SET_WORKINGTIME(state, payload) {
+      state.workingTimes = [...state.workingTimes, payload.data.data]
     }
   },
   actions: {
@@ -58,6 +61,7 @@ export default new Vuex.Store({
         })
     },
     async getUserById ({ commit }, payload) {
+      console.log("GET USER")
       await Axios
         .get('http://localhost:4000/api/users/' + payload)
         .then((response) => {
@@ -75,6 +79,35 @@ export default new Vuex.Store({
         .then((response) => {
           commit('SET_CLOCK', response)
         })
+    },
+    async getClockByUserId ({ commit }) {
+      await Axios
+        .get('http://localhost:4000/api/clocks/user/4')
+        .then((response) => {
+          commit('SET_CLOCK', response)
+        })
+    },
+
+    getClock () {
+      Axios
+        .get('http://localhost:4000/api/clocks')
+        .then((response) => {
+          console.log("getclockresp", response)
+          // commit('SET_CLOCK', response.da)
+        })
+    },
+
+    // WORKING TIMES DISPATCHES
+
+    createWorkingTime ({ commit }, payload) {
+
+      payload.working_time['user_id'] = this.state.userId;
+
+      Axios
+        .post('http://localhost:4000/api/workingtimes', payload)
+        .then((response) => {
+          commit('SET_WORKINGTIME', response)
+        })
     }
   },
   getters: {
@@ -87,6 +120,9 @@ export default new Vuex.Store({
         email: state.userEmail,
         id: state.userId
       }
+    },
+    getterUserClock: state => {
+      return state.clock
     }
   },
   modules: {

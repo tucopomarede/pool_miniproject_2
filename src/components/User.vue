@@ -1,22 +1,54 @@
 <template>
   <v-card class="container">
       <div v-if="!isUser || editUser">
-          <v-text-field v-model="username" label="Username">
-          </v-text-field>
-          <v-text-field v-model="email" label="Email">
-          </v-text-field>
-          <v-btn v-if="!editUser" color="blue" @click="createUser">
+         <h1>Welcome</h1>
+        <p>
+            <input
+            placeholder="User Name"
+            id="username"
+            v-model="username"
+            type="text"
+            name="name"
+            >
+        </p>
+        
+        <p> 
+            <input
+            placeholder="Email"
+            id="email"
+            v-model="email"
+            type="email"
+            name="email"
+            >
+        </p>
+          <v-btn v-if="!editUser" color="blue" outlined @click="createUser">
               Create user
           </v-btn>
-          <v-btn v-else-if="editUser" color="blue" @click="saveUpdateUser">
+          <v-btn v-else-if="editUser" color="blue" outlined @click="saveUpdateUser">
               Save user
           </v-btn>
       </div>
       <div v-else-if="isUser">
-        <v-text-field readonly v-model="username" label="Username">
-        </v-text-field>
-        <v-text-field readonly v-model="email" label="Email">
-        </v-text-field>
+        <h1>Welcome</h1>
+        <p>
+            <input
+            placeholder="User Name"
+            id="lastName"
+            v-model="username"
+            type="text"
+            name="name"
+            >
+        </p>
+        
+        <p> 
+            <input
+            placeholder="Email"
+            id="email"
+            v-model="email"
+            type="email"
+            name="email"
+            >
+        </p>
          <v-btn
             class="mx-2"
             fab
@@ -36,7 +68,7 @@
             @click="deleteUser"
             >
             <v-icon dark>
-                mdi-delete
+                del
             </v-icon>
         </v-btn>
       </div>
@@ -51,7 +83,7 @@ export default {
   },
   data() {
       return {
-          isUser: true,
+          isUser: false,
           editUser: false,
           username: '',
           email: ''
@@ -59,7 +91,7 @@ export default {
   },
   methods: {
       createUser(){
-          this.isUser = true;
+            this.isUser = true;
           this.editUser = false;
           console.log("user store infos :", this.$store.getters.getterAllUserInfos)
           this.$store.dispatch('setUser', {
@@ -99,8 +131,6 @@ export default {
 
       this.username = user.username;
       this.email = user.email;
-    //   if (this.defaultUser)
-    // console.log('default user @ created')
   }
 }
 </script>
@@ -110,19 +140,17 @@ export default {
     height: 50%;
     width: 30%;
 }
-
-h3 {
-  margin: 40px 0 0;
+h1 {
+    margin: 20px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+input {
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius:10px;
+    margin: 15px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+button {
+    margin:20px;
 }
 </style>

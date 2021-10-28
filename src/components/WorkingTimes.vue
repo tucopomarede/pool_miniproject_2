@@ -1,8 +1,8 @@
 <template>
     <div>
         <v-card class="container">
-            <h2>WORKING TIMES</h2>
-            <div v-for="wt in allWorkTimes" :key="wt">
+            <h1>Your working times</h1>
+            <div v-for="wt in allWorkTimes" :key="wt" class="workingTime">
                 <WorkingTime :dataOfWt="wt"/>
             </div>
         </v-card>
@@ -56,19 +56,11 @@ export default {
     height: 50%;
     width: 100%;
 }
-
-h3 {
-  margin: 40px 0 0;
+h1 {
+    margin: 20px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.workingTime {
+    margin: 20px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
 </style>
