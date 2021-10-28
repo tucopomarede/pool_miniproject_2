@@ -40,8 +40,14 @@ export default {
       },
       clock() {
         this.clockIn = true;
-        
         this.startDateTime = this.getTimeNow();
+
+        this.$store.dispatch('createClock', {
+          clock: {
+            time: this.startDateTime,
+            status: true,
+          }
+        })
       }
   }
 }
